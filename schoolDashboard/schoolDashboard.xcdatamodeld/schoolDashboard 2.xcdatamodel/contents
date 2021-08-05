@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20E241" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Activity" representedClassName="Activity" syncable="YES" codeGenerationType="class">
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Attendance" representedClassName="Attendance" syncable="YES">
+        <attribute name="attendId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="gradeName" optional="YES" attributeType="String"/>
+        <attribute name="subject" optional="YES" attributeType="String"/>
+        <attribute name="teacherName" optional="YES" attributeType="String"/>
+        <relationship name="attendToTeacher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Teacher" inverseName="teacherToAttend" inverseEntity="Teacher"/>
+        <relationship name="fromAttendanceToDoesAttend" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="YesNoAttend" inverseName="fromDoesAttendToAttendance" inverseEntity="YesNoAttend"/>
+    </entity>
+    <entity name="Exam" representedClassName="Exam" syncable="YES">
+        <attribute name="examDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="examDuration" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="examEndTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="examName" optional="YES" attributeType="String"/>
+        <attribute name="examStartTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="gradeName" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="teacherName" optional="YES" attributeType="String"/>
+        <relationship name="fromExamToExamQuestion" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExamQuestion" inverseName="fromExamQuestionToExam" inverseEntity="ExamQuestion"/>
+        <relationship name="fromExamToStudentAnswer" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StudentAnswer" inverseName="fromStudentAnswerToExam" inverseEntity="StudentAnswer"/>
+    </entity>
+    <entity name="ExamQuestion" representedClassName="ExamQuestion" syncable="YES">
+        <attribute name="correctAnswer" optional="YES" attributeType="String"/>
+        <attribute name="examId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="qId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="question" optional="YES" attributeType="String"/>
+        <relationship name="fromExamQuestionToExam" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exam" inverseName="fromExamToExamQuestion" inverseEntity="Exam"/>
+        <relationship name="fromExamQuestionToQuestions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Questions" inverseName="fromQuestionsToExamQuestion" inverseEntity="Questions"/>
+        <relationship name="fromExamQuestionToStudentAnswer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StudentAnswer" inverseName="fromStudentAnswerToExamQuestion" inverseEntity="StudentAnswer"/>
+    </entity>
+    <entity name="GradeForTeaceher" representedClassName="GradeForTeaceher" syncable="YES">
+        <attribute name="grade" optional="YES" attributeType="String"/>
+        <relationship name="gradeToTeacher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Teacher" inverseName="teacherToGrade" inverseEntity="Teacher"/>
+    </entity>
+    <entity name="GradeSections" representedClassName="GradeSections" syncable="YES" codeGenerationType="class">
+        <attribute name="grade" optional="YES" attributeType="String"/>
+        <attribute name="roomNo" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="Notice" representedClassName="Notice" syncable="YES" codeGenerationType="class">
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Questions" representedClassName="Questions" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="question" optional="YES" attributeType="String"/>
+        <relationship name="fromQuestionsToExamQuestion" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExamQuestion" inverseName="fromExamQuestionToQuestions" inverseEntity="ExamQuestion"/>
+    </entity>
+    <entity name="Student" representedClassName="Student" syncable="YES">
+        <attribute name="adderss" optional="YES" attributeType="String"/>
+        <attribute name="addmissionDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="birthday" optional="YES" attributeType="String"/>
+        <attribute name="birthMonth" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="birthYear" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="brithDay" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="fatherAddress" optional="YES" attributeType="String"/>
+        <attribute name="fatherName" optional="YES" attributeType="String"/>
+        <attribute name="fatherNationality" optional="YES" attributeType="String"/>
+        <attribute name="fatherOccupation" optional="YES" attributeType="String"/>
+        <attribute name="fatherPhone" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="garde" optional="YES" attributeType="String"/>
+        <attribute name="gender" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="motherAddress" optional="YES" attributeType="String"/>
+        <attribute name="motherName" optional="YES" attributeType="String"/>
+        <attribute name="motherNationality" optional="YES" attributeType="String"/>
+        <attribute name="motherOccupation" optional="YES" attributeType="String"/>
+        <attribute name="motherPhone" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="nationality" optional="YES" attributeType="String"/>
+        <attribute name="phoneNo" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="religion" optional="YES" attributeType="String"/>
+        <attribute name="studentId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="fromStudentToDoesAttend" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="YesNoAttend" inverseName="fromDoesAttendToStudent" inverseEntity="YesNoAttend"/>
+        <relationship name="relationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SubmittedFees" inverseName="belongToStudent" inverseEntity="SubmittedFees"/>
+    </entity>
+    <entity name="StudentAnswer" representedClassName="StudentAnswer" syncable="YES">
+        <attribute name="answer" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="qId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="startAnsweringDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="stringAnswer" optional="YES" attributeType="String"/>
+        <attribute name="studentName" optional="YES" attributeType="String"/>
+        <relationship name="fromStudentAnswerToExam" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exam" inverseName="fromExamToStudentAnswer" inverseEntity="Exam"/>
+        <relationship name="fromStudentAnswerToExamQuestion" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExamQuestion" inverseName="fromExamQuestionToStudentAnswer" inverseEntity="ExamQuestion"/>
+    </entity>
+    <entity name="SubmittedFees" representedClassName="SubmittedFees" syncable="YES">
+        <attribute name="adding" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="fee" attributeType="String"/>
+        <attribute name="mount" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="belongToStudent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Student" inverseName="relationship" inverseEntity="Student"/>
+    </entity>
+    <entity name="Teacher" representedClassName="Teacher" syncable="YES">
+        <attribute name="addmissionDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="birthday" optional="YES" attributeType="String"/>
+        <attribute name="birthDay" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="birthMonth" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="birthYear" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="experience" optional="YES" attributeType="String"/>
+        <attribute name="gender" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="major" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="nationality" optional="YES" attributeType="String"/>
+        <attribute name="phoneNo" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="religion" optional="YES" attributeType="String"/>
+        <attribute name="salary" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="teachingGrade" optional="YES" attributeType="String"/>
+        <attribute name="workId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="teacherToAttend" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Attendance" inverseName="attendToTeacher" inverseEntity="Attendance"/>
+        <relationship name="teacherToGrade" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GradeForTeaceher" inverseName="gradeToTeacher" inverseEntity="GradeForTeaceher"/>
+    </entity>
+    <entity name="TeacherX" representedClassName="TeacherX" syncable="YES" codeGenerationType="class">
+        <attribute name="addmissionDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="birthDay" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="birthMonth" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="birthYear" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="experience" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="gender" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="major" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="nationality" optional="YES" attributeType="String"/>
+        <attribute name="phoneNo" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="religion" optional="YES" attributeType="String"/>
+        <attribute name="salary" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="workId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="Worker" representedClassName="Worker" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="birthDay" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="birthMonth" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="birthYear" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="dateOfWorking" optional="YES" attributeType="String"/>
+        <attribute name="gender" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="nationality" optional="YES" attributeType="String"/>
+        <attribute name="phoneNo" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="salary" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="work" optional="YES" attributeType="String"/>
+        <attribute name="workId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="YesNoAttend" representedClassName="YesNoAttend" syncable="YES">
+        <attribute name="attendId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="doesAttend" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="studentName" optional="YES" attributeType="String"/>
+        <relationship name="fromDoesAttendToAttendance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Attendance" inverseName="fromAttendanceToDoesAttend" inverseEntity="Attendance"/>
+        <relationship name="fromDoesAttendToStudent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Student" inverseName="fromStudentToDoesAttend" inverseEntity="Student"/>
+    </entity>
+    <elements>
+        <element name="Attendance" positionX="-144.3627319335938" positionY="300.4987487792969" width="128" height="134"/>
+        <element name="Exam" positionX="-171" positionY="225" width="128" height="179"/>
+        <element name="ExamQuestion" positionX="-315" positionY="144" width="128" height="134"/>
+        <element name="GradeForTeaceher" positionX="-12.313232421875" positionY="166.2218627929688" width="128" height="59"/>
+        <element name="GradeSections" positionX="171.8684692382812" positionY="67.93092346191406" width="128" height="59"/>
+        <element name="Item" positionX="191.85107421875" positionY="21.56790161132812" width="128" height="44"/>
+        <element name="Notice" positionX="-18" positionY="135" width="128" height="88"/>
+        <element name="Questions" positionX="-306" positionY="153" width="128" height="74"/>
+        <element name="Student" positionX="-530.339111328125" positionY="-28.31840515136719" width="128" height="434"/>
+        <element name="StudentAnswer" positionX="-324" positionY="135" width="128" height="134"/>
+        <element name="SubmittedFees" positionX="-358.9693603515625" positionY="162.9195556640625" width="128" height="103"/>
+        <element name="Teacher" positionX="175.232421875" positionY="168.0672607421875" width="128" height="329"/>
+        <element name="TeacherX" positionX="-213.6353759765625" positionY="-29.52334594726562" width="128" height="284"/>
+        <element name="Worker" positionX="-11.2266845703125" positionY="-10.84954833984375" width="128" height="239"/>
+        <element name="YesNoAttend" positionX="-315.9547119140625" positionY="384.349853515625" width="128" height="104"/>
+        <element name="Activity" positionX="-324" positionY="135" width="128" height="74"/>
+    </elements>
+</model>
